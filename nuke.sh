@@ -1,10 +1,15 @@
 #!/bin/sh
 
-if [ -f .env ]; then
-    source .env
-    echo "Loaded environment variables for .env file"
+# Get the absolute path to the directory containing this script
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+
+# Check if the .env file exists in the same directory as the script
+if [ -f "$SCRIPT_DIR/.env" ]; then
+    # Source the .env file using its absolute path
+    source "$SCRIPT_DIR/.env"
+    echo "Loaded environment variables from $SCRIPT_DIR/.env"
 else
-    echo ".env file not found"
+    echo ".env file not found in $SCRIPT_DIR"
     exit 1
 fi
 
